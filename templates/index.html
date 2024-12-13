@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Audio Extractor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            input[type="text"] {
+                width: 100%;
+            }
+
+            button {
+                width: 100%;
+                padding: 15px;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube Audio Extractor</h1>
+    <input type="text" id="youtube_url" placeholder="Enter YouTube URL">
+    <button onclick="extractAudio()">Extract Audio</button>
+    <br><br>
+    <audio id="audioPlayer" controls class="hidden"></audio>
+    <br>
+    <a id="downloadLink" href="#" download="extracted_audio.mp3" class="hidden">Download Audio</a>
+
+    <script>
+        function extractAudio() {
+            const youtubeUrl = document.getElementById('youtube_url').value;
+            fetch('/extract_audio', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url: youtubeUrl })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const audioPlayer = document.getElementById('audioPlayer');
+                const downloadLink = document.getElementById('downloadLink');
+                
+                // Set the audio player source and display the player
+                audioPlayer.src = data.audio_file;
+                audioPlayer.classList.remove('hidden');
+                
+                // Set the download link and display it
+                downloadLink.href = data.audio_file;
+                downloadLink.classList.remove('hidden');
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
