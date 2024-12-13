@@ -1,3 +1,2 @@
-flask
-yt-dlp
-ffmpeg 
+Flask==2.3.2
+yt-dlp==2024.01.01  # You can adjust the version based on the latest release
