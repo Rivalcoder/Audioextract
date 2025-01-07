@@ -12,13 +12,13 @@ This project provides a simple Flask-based API to extract audio from YouTube vid
 ## 📂 Project Structure
 
 ```bash
-.
 ├── api
 │   └── main.py         # Main Flask app
 ├── static              # Folder to store extracted audio
 ├── templates
 │   └── index.html      # HTML for the web interface
 └── README.md           # Project documentation
+```
 
 ## 🚀 Getting Started
 
@@ -40,8 +40,9 @@ Make sure you have the following installed:
 
 2. To install the required Python packages, run the following command:
 
-```bash
-pip install -r requirements.txt
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 ### 3️⃣ Start the Flask Application
 
